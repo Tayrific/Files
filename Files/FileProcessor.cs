@@ -48,6 +48,7 @@ namespace Files
                 Directory.CreateDirectory(backupDirectoryPath);
             }
 
+            
             // Copy file to backup dir
             string inputFileName = Path.GetFileName(InputFilePath);
             string backupFilePath = Path.Combine(backupDirectoryPath, inputFileName);
