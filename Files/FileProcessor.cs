@@ -66,6 +66,29 @@ namespace Files
 
             WriteLine($"Moving {inputFileName} to {inProgressFilePath}");
             File.Move(InputFilePath, inProgressFilePath);
+
+            // Determine type of file
+            string extension = Path.GetExtension(InputFilePath);
+            switch(extension)
+            {
+                case ".txt":
+                    WriteLine($"{extension} file type");
+                    ProcessTextFile(inProgressFilePath);
+                    break;
+                default:
+                    WriteLine($"{extension} is an unsupported file type.");
+                    break;
+            }
+
+            // Move file after processing is complete
+            string completedDirectoryPath = Path.Combine(rootDirectoryPath, CompletedDirectoryName);
+            Directory.CreateDirectory(completedDirectoryPath);
+        }
+
+        private void ProcessTextFile(string inProgressFilePath)
+        {
+            WriteLine($"Processing text file {inProgressFilePath}");
+            // Read in and process
         }
     }
 }
