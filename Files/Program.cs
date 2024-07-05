@@ -101,7 +101,20 @@ namespace Files
 
         static void ProcessDirectory(string DirectoryPath, string fileType)
         {
-            
+            switch(fileType)
+            {
+                case "TEXT":
+                    string[] textFiles = Directory.GetFiles(DirectoryPath, "*.txt");
+                    foreach (string textFilePath in textFiles)
+                    {
+                        var fileProcessor = new FileProcessor(textFilePath);
+                        fileProcessor.Process();
+                    }
+                    break;
+                default:
+                    WriteLine($"ERROR: {fileType} is not supported");
+                    return;
+            }
         }
     }
 }
