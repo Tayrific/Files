@@ -83,6 +83,20 @@ namespace Files
             // Move file after processing is complete
             string completedDirectoryPath = Path.Combine(rootDirectoryPath, CompletedDirectoryName);
             Directory.CreateDirectory(completedDirectoryPath);
+
+            string fileNameWithCompletedExtention = Path.ChangeExtension(inputFileName, ".complete");
+            string completedFileName = $"{Guid.NewGuid()}_{fileNameWithCompletedExtention}";
+
+            string completedFilePath = Path.Combine(completedDirectoryPath, completedFileName);
+
+            WriteLine($"Moving {inProgressFilePath} to {completedFilePath}");
+            File.Move(inProgressFilePath, completedFilePath);
+
+            // Deleting a directory
+            string inProgressDirectoryPath = Path.GetDirectoryName(inProgressFilePath);
+            Directory.Delete(inProgressDirectoryPath, true);
+
+
         }
 
         private void ProcessTextFile(string inProgressFilePath)
